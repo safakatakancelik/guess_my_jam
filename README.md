@@ -20,11 +20,11 @@ React, Vite, Tailwind and Motion, with Supabase Realtime for live play. It deplo
 ## Run locally
 
 ```bash
-cp .env.example .env   # add your Supabase project URL and anon key
+cp .env.example .env   # add your Supabase project URL and publishable key
 npm install
 npm run dev
 ```
 
 ## Deploy
 
-Netlify uses `netlify.toml`. It runs `npm run build` and publishes `dist/`. Set `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` in the site's environment variables.
+Netlify uses `netlify.toml`. It runs `npm run build` and publishes `dist/`. Set `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY` in the site's environment variables.

@@ -11,7 +11,10 @@ export interface Room {
 }
 
 const url = import.meta.env.VITE_SUPABASE_URL as string | undefined
-const key = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined
+// Publishable key (sb_publishable_…); the legacy anon JWT still works as a fallback.
+const key = (import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY ?? import.meta.env.VITE_SUPABASE_ANON_KEY) as
+  | string
+  | undefined
 const supabase = url && key ? createClient(url, key) : null
 
 export const usingSupabase = !!supabase
