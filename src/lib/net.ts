@@ -38,7 +38,7 @@ export function openRoom(code: string, onMsg: (m: Msg) => void): Promise<Room> {
           close: () => void supabase.removeChannel(channel),
         })
       } else if (status === 'CHANNEL_ERROR' || status === 'TIMED_OUT') {
-        reject(new Error(`Realtime ${status}`))
+        reject(new Error('Game server is waking up or unavailable. Try again in a minute.'))
       }
     })
   })
