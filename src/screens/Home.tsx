@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { Button, Logo, Screen } from '../components/ui'
 import { usingSupabase } from '../lib/net'
 
@@ -13,7 +13,27 @@ export function Home({
 }) {
   const [name, setName] = useState(initialName)
   const [code, setCode] = useState(initialCode)
-  const ok = name.trim().length > 0
+  const [hint, setHint] = useState<string | null>(null)
+  const nameRef = useRef<HTMLInputElement>(null)
+
+  // Accepts a bare code or a pasted invite link (…?room=ABCD).
+  const parseCode = (raw: string) => {
+    const fromLink = raw.match(/room=([a-z]{4})/i)?.[1]
+    return (fromLink ?? raw).toUpperCase().replace(/[^A-Z]/g, '').slice(0, 4)
+  }
+
+  const enter = (room: string | null) => {
+    if (!name.trim()) {
+      setHint('Add a nickname first')
+      nameRef.current?.focus()
+      return
+    }
+    if (room !== null && room.length !== 4) {
+      setHint('Room codes are 4 letters')
+      return
+    }
+    onEnter(name.trim(), room)
+  }
 
   return (
     <Screen k="home">
@@ -33,11 +53,16 @@ export function Home({
             id="name"
             value={name}
             maxLength={20}
-            onChange={(e) => setName(e.target.value)}
+            ref={nameRef}
+            onChange={(e) => {
+              setName(e.target.value)
+              setHint(null)
+            }}
             placeholder="e.g. Funky Pete"
             className="h-13 rounded-2xl border border-line bg-panel px-4 text-lg text-white outline-none placeholder:text-mute/60 focus:border-jam"
           />
-          <Button disabled={!ok} onClick={() => onEnter(name.trim(), null)} className="mt-2">
+          {hint && <p className="text-sm text-ember">{hint}</p>}
+          <Button onClick={() => enter(null)} className="mt-2">
             Create a room
           </Button>
         </div>
@@ -49,12 +74,20 @@ export function Home({
         <div className="flex gap-3">
           <input
             value={code}
-            maxLength={4}
-            onChange={(e) => setCode(e.target.value.toUpperCase().replace(/[^A-Z]/g, ''))}
+            autoCapitalize="characters"
+            autoCorrect="off"
+            autoComplete="off"
+            spellCheck={false}
+            enterKeyHint="go"
+            onChange={(e) => {
+              setCode(parseCode(e.target.value))
+              setHint(null)
+            }}
+            onKeyDown={(e) => e.key === 'Enter' && enter(code)}
             placeholder="CODE"
             className="h-13 w-full min-w-0 rounded-2xl border border-line bg-panel px-4 text-center text-xl font-bold tracking-[0.4em] text-white uppercase outline-none placeholder:tracking-[0.3em] placeholder:text-mute/50 focus:border-jam"
           />
-          <Button variant="ghost" disabled={!ok || code.length !== 4} onClick={() => onEnter(name.trim(), code)}>
+          <Button variant="ghost" disabled={code.length !== 4} onClick={() => enter(code)}>
             Join
           </Button>
         </div>
