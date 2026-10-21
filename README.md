@@ -2,7 +2,7 @@
 
 A two-player party game about music taste. You and a friend swipe through the same 20 songs from a genre. Then you take turns: one player picks a song they liked and describes how it makes them feel, without naming it. The other player has 30 seconds to spot it among three songs, and a faster guess scores more points. At the end you see how well you read each other and how much your tastes overlap.
 
-**Play it:** <https://YOUR-SITE.netlify.app> <!-- TODO: replace with the live Netlify URL -->
+**Play it:** https://gmjam.satakanc.com/ <!-- TODO: replace with the live Netlify URL -->
 
 <p>
   <img src="docs/screenshots/2-lobby.jpg" width="160" alt="Lobby with room code" />
@@ -66,5 +66,4 @@ Browser (guest) ─┘    (broadcast channel)  └── Supabase: one read-only
 ## The challenge
 
 This was built and deployed in about one hour as a speed challenge, pairing with [Claude Code](https://claude.com/claude-code), from idea to a live multiplayer game on free tiers only.
-
-<!-- TODO: add the challenge video here -->
+https://www.youtube.com/watch?v=jGE7M4-kLkc&feature=youtu.be
