@@ -450,7 +450,7 @@ function Results({ s, me, dispatch }: P) {
           const r = read(p)
           return (
             <div key={p.id} className="rounded-2xl border border-line bg-panel p-4">
-              <p className="truncate text-sm text-mute">{p.name} read the room</p>
+              <p className="truncate text-sm text-mute">{p.name}'s guesses</p>
               <p className="mt-1 text-3xl font-bold text-jam">{r.pts}</p>
               <p className="text-sm text-mute">
                 {r.hits}/{r.of} correct
