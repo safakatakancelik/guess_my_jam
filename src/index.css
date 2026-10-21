@@ -1,0 +1,45 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --color-ink: #0b0c0e;
+  --color-panel: #141619;
+  --color-raise: #1c1f23;
+  --color-line: #2a2e34;
+  --color-silver: #d4d8de;
+  --color-mute: #868c95;
+  --color-jam: #3ee08f;
+  --color-ember: #ff6b4a;
+}
+
+html,
+body,
+#root {
+  min-height: 100dvh;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(60rem 30rem at 85% -10%, rgb(62 224 143 / 0.08), transparent 60%),
+    radial-gradient(50rem 30rem at -10% 110%, rgb(255 107 74 / 0.06), transparent 60%),
+    var(--color-ink);
+  color: var(--color-silver);
+  font-family: var(--font-sans);
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none;
+}
+
+button {
+  cursor: pointer;
+}
+button:disabled {
+  cursor: not-allowed;
+}
+
+.chrome-text {
+  background: linear-gradient(180deg, #ffffff 0%, #c9ced6 45%, #7f8792 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
