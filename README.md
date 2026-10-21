@@ -38,7 +38,7 @@ Browser (host) ──┐                         ┌── Netlify: static site 
 Browser (guest) ─┘    (broadcast channel)  └── Supabase: one read-only "keepalive" table, nothing else
 ```
 
-- **Netlify** hosts the static build (`npm run build` → `dist/`) and redeploys on every push to `main`. It needs two environment variables: `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY`.
+- **Netlify** hosts the static build (`npm run build` → `dist/`) and redeploys on every push to `main`. It needs two environment variables: `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY`. Optionally, `VITE_HOWTO_VIDEO_URL` sets the YouTube video in the home screen's "How to play" pop-up (any YouTube link; redeploy after changing it).
 - **Supabase Realtime** carries the live game. Each room is a broadcast channel named `gmj-<CODE>`. There are no accounts and no game data is stored.
 - **The host's browser runs the game.** It holds the full state, applies the guest's actions and broadcasts the result, plus a heartbeat every 3 s. This keeps the backend at zero code. The trade-off: if the host closes or refreshes the tab, the game ends.
 - **The publishable key is public by design.** It ships in the frontend bundle. The repo contains no secrets, and none are needed.

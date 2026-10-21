@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react'
+import { HowToPlay } from '../components/HowToPlay'
 import { Button, Logo, Screen } from '../components/ui'
 import { usingSupabase } from '../lib/net'
 
@@ -43,6 +44,9 @@ export function Home({
             <Logo />
           </div>
           <p className="mt-3 text-mute">Swipe songs. Describe a vibe. Read each other's minds.</p>
+          <div className="mt-4">
+            <HowToPlay />
+          </div>
         </div>
 
         <div className="flex flex-col gap-3">
